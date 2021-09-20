@@ -9,7 +9,7 @@ export const getForeCast = (latitude, longitude, callback) => {
             callback('Unable to find location');
         } else {
             const currentWeatherData = body.current;
-            callback(undefined, `${currentWeatherData.weather_descriptions[0] ?? "Weather Info not available"}. It is currently ${currentWeatherData.temperature} degrees out. It feels like ${currentWeatherData.feelslike} degrees out`)
+            callback(undefined, `${currentWeatherData.weather_descriptions[0] ?? "Weather Info not available"}. It is currently ${currentWeatherData.temperature} degrees out. It feels like ${currentWeatherData.feelslike} degrees out. The humidity is ${currentWeatherData.humidity}`)
         }
 
     })
