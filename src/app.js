@@ -5,6 +5,8 @@ import hbs from 'hbs';
 import { getGeoCode } from '../utils/geocode.js';
 import { getForeCast } from '../utils/forecast.js';
 
+const port = process.env.PORT ?? 3000;
+
 // setting up the __dirname field. As it is not available in module scope
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -54,18 +56,18 @@ app.get('/weather', (request, response) => {
     getGeoCode(request.query.address, (error, { latitude, longitude, location } = {}) => {
 
         if (error) {
-            return response.send({error});
+            return response.send({ error });
         }
 
         getForeCast(latitude, longitude, (error, foreCastData) => {
 
             if (error) {
-                return response.send({error});
+                return response.send({ error });
             }
             response.send({
                 location,
                 foreCastData,
-                address : request.query.address
+                address: request.query.address
             })
         })
     })
@@ -98,6 +100,6 @@ app.get('*', (request, response) => {
     });
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server started on 3000 port');
 });
